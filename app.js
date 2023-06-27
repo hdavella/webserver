@@ -1,19 +1,32 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require('express');
+const hbs = require('hbs');
+const app = express();
+const port = 3000;
+
+app.set('view engine', 'hbs');
+hbs.registerPartials(__dirname + '/views/partials', function (err) {});
 
 app.use( express.static("public"));
 
 app.get( "/" , (req, res) => {
-  res.sendFile(__dirname + "/public/index.html");
+  res.render("home", {
+    nombre: "Hernan",
+    titulo: "hbs"
+  });
 });
 
 app.get( "/generic" , (req, res) => {
-  res.sendFile(__dirname + "/public/generic.html");
+  res.render("generic", {
+    nombre: "Hernan",
+    titulo: "hbs"
+  })
 });
 
 app.get( "/elements" , (req, res) => {
-  res.sendFile(__dirname + "/public/elements.html");
+  res.render("elements", {
+    nombre: "Hernan",
+    titulo: "hbs"
+  });
 });
 
 app.get( "*" , (req, res) => {
